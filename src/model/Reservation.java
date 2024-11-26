@@ -16,4 +16,7 @@ public abstract class Reservation {
 	public int getMois() {
 		return mois;
 	}
+
+	@Override
+	public abstract String toString();
 }
