@@ -5,10 +5,20 @@ import model.Client;
 import model.FormulaireRestaurant;
 import model.Reservation;
 import model.ReservationRestaurant;
+import model.Restaurant;
 
 public class ControlReserverTable {
+	private Restaurant restaurant;
+	private CarnetClientele carnetClientele;
+	private FormulaireRestaurant formulaires[] = new FormulaireRestaurant[100];
+
+	public ControlReserverTable(Restaurant restaurant, CarnetClientele carnetClientele) {
+		this.restaurant = restaurant;
+		this.carnetClientele = carnetClientele;
+	}
+
 	public int[] trouverPossibilite(int jour, int mois, int nombrePersonnes, int numService) {
-		FormulaireRestaurant formulaire = FormulaireRestaurant(jour, mois, nombrePersonnes, numService);
+		FormulaireRestaurant formulaire = new FormulaireRestaurant(jour, mois, nombrePersonnes, numService);
 		boolean formulaireEnregistrer = false;
 		int numeroFormulaire = -1;
 
@@ -19,7 +29,7 @@ public class ControlReserverTable {
 				numeroFormulaire = i;
 			}
 		}
-		int[] possibilites = donnerPossibilites(formulaire);
+		int[] possibilites = restaurant.donnerPossibilites(formulaire);
 
 		int[] retour = new int[possibilites.length + 1];
 		retour[0] = numeroFormulaire;
@@ -36,8 +46,8 @@ public class ControlReserverTable {
 
 		if (reservation instanceof ReservationRestaurant) {
 			ReservationRestaurant reservationRestaurant = (ReservationRestaurant) reservation;
-			Client client = CarnetClientele.getClient(numClient);
-			client.ajouterReservation(reservation);
+			Client client = carnetClientele.getClient(numClient);
+			client.ajouterReservation(reservationRestaurant);
 		}
 	}
 }
