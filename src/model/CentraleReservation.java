@@ -11,6 +11,7 @@ public class CentraleReservation<E extends EntiteReservable, F extends Formulair
 	public int ajouterEntite(E entite) {
 		tableauEntite[nombreEntite] = entite;
 		nombreEntite += 1;
+		entite.setNumero(nombreEntite);
 		return nombreEntite;
 	}
 
