@@ -1,7 +1,7 @@
 package model;
 
 public abstract class EntiteReservable<F extends Formulaire> {
-	protected CalendrierAnnuel calendrier;
+	protected CalendrierAnnuel calendrier = new CalendrierAnnuel();
 	private int numero;
 
 	public void setNumero(int numero) {

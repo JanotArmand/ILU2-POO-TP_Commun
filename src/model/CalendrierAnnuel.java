@@ -1,7 +1,7 @@
 package model;
 
 public class CalendrierAnnuel {
-	private Mois calendrier[];
+	Mois calendrier[];
 
 	public CalendrierAnnuel() {
 		this.calendrier = new Mois[12];

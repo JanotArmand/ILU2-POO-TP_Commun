@@ -1,6 +1,6 @@
 package model;
 
-public class CentraleReservation<E extends EntiteReservable, F extends Formulaire, R extends Reservation> {
+public class CentraleReservation<E extends EntiteReservable, F extends Formulaire> {
 	private E tableauEntite[];
 	private int nombreEntite = 0;
 
@@ -17,14 +17,21 @@ public class CentraleReservation<E extends EntiteReservable, F extends Formulair
 	public int[] donnerPossibilites(F formulaire) {
 		int tableau[] = new int[nombreEntite];
 		for (int i = 0; i < nombreEntite; i++) {
-			if (tableauEntite[i].estLibre(formulaire)) {
-				tableau[i] = i;
+			if (tableauEntite[i].compatible(formulaire)) {
+				tableau[i] = i + 1;
+			} else {
+				tableau[i] = 0;
 			}
 		}
 		return tableau;
 	}
 
-	public R reserver(int numeroEntite, F formulaire) {
-		return new R(formulaire.getJour(), formulaire.getMois());
+	public Reservation reserver(int numeroEntite, F formulaire) {
+		int i = 0;
+		while (tableauEntite[i].getNumero() != numeroEntite) {
+			i += 1;
+		}
+		formulaire.setIdentificationEntite(tableauEntite[i].getNumero());
+		return tableauEntite[i].reserver(formulaire);
 	}
 }
