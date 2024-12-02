@@ -39,4 +39,9 @@ public class Client {
 		chaine.append(", adresseMail=" + adresseMail + ", mdp=" + mdp);
 		return chaine.toString();
 	}
+
+	// J'ai rajouté cette fonction pour pouvoir tester dans TestReserverTable
+	public Reservation[] getReservations() {
+		return reservations;
+	}
 }

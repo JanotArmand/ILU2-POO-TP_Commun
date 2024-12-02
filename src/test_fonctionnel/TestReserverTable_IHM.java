@@ -9,8 +9,10 @@ import control.ControlVisualiserCarnetClientele;
 import dialog.DialogReservation;
 import frontiere.BoundaryConnecterClient;
 import frontiere.BoundaryCreerClient;
+import frontiere.BoundaryReserverTable;
 import interface_noyau_fonctionnel.AdaptateurDuNoyauFonctionnel;
 import model.CarnetClientele;
+import model.Client;
 import model.Restaurant;
 
 public class TestReserverTable_IHM {
@@ -46,6 +48,16 @@ public class TestReserverTable_IHM {
 		AdaptateurDuNoyauFonctionnel AdaptateurNF = new AdaptateurDuNoyauFonctionnel(controlReserverTable,
 				controlVisualiserCarnetClientele);
 		DialogReservation dialogReservation = new DialogReservation(AdaptateurNF);
+
+		BoundaryReserverTable boundaryReserverTable = new BoundaryReserverTable(controlReserverTable);
+		boundaryReserverTable.ReserverTable(numClient);
+
+		System.out.println("\n-------- CONTROL DES DONNEES --------");
+		Client client = carnetClientele.getClient(0);
+		System.out.println(client.toString());
+		System.out.println("Reservation :\n");
+		System.out.println(client.getReservations()[0].toString());
+
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {

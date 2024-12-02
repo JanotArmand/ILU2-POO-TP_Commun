@@ -24,11 +24,13 @@ public class BoundaryReserverTable {
 
 		int[] possibilites = controlReserverTable.trouverPossibilite(jour, mois, nbPersonnes, service);
 		for (int i = 1; i < possibilites.length; i++) {
-			System.out.println("Numéro de table : " + i + "\n");
+			if (possibilites[i] != 0) {
+				System.out.println("Numéro de table : " + possibilites[i] + "\n");
+			}
 		}
 		System.out.println("\nChoisissez votre table.\n");
 		int numTable = Integer.valueOf(scanner.next());
 
-		controlReserverTable.reserver(numClient, numTable, proposition[0]);
+		controlReserverTable.reserver(numClient, numTable, possibilites[0]);
 	}
 }
